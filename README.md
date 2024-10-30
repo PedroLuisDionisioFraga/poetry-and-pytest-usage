@@ -48,3 +48,15 @@ classDiagram
     Room "1" <-- "*" Schedule : "associates with"
     Schedule "*" --> "1" Period
 ```
+
+## Linter
+The project uses [flake8](https://flake8.pycqa.org/en/latest/) as linter. To run the linter in all code, execute the following command:
+```bash
+flake8 .
+```
+If the linter find a problem, it will show a message with the error.
+```bash
+./src/Schedule.py:13:3: E303 too many blank lines (2)
+./src/Schedule.py:20:1: W391 blank line at end of file
+```
+Fixing the error manually and when finish, flake8 will not show any message.
