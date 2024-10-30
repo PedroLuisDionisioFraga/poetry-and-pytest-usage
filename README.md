@@ -60,3 +60,15 @@ If the linter find a problem, it will show a message with the error.
 ./src/Schedule.py:20:1: W391 blank line at end of file
 ```
 Fixing the error manually and when finish, flake8 will not show any message.
+
+## Formatter
+The project uses [black](https://black.readthedocs.io/en/stable/) as formatter. To run the formatter in all code, execute the following command:
+```bash
+black .
+```
+
+## Sorting Imports
+The project uses [isort](https://pycqa.github.io/isort/) as sorting imports. To run the sorting imports in all code, execute the following command:
+```bash
+isort .
+```
