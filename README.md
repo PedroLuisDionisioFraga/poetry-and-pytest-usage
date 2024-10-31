@@ -35,16 +35,39 @@ classDiagram
         - Period period
         + get_client_name() string
         + get_room() Room
-        + reserve_room(room: Room, period: Period) bool
     }
 
     class Period {
-        - Date start_date
-        - Date end_date
-        + update_start_date() bool
-        + update_end_date() bool
+        - Date start
+        - Date end
+        + update_start() bool
+        + update_end() bool
     }
 
     Room "1" <-- "*" Schedule : "associates with"
     Schedule "*" --> "1" Period
+```
+
+## Linter
+The project uses [flake8](https://flake8.pycqa.org/en/latest/) as linter. To run the linter in all code, execute the following command:
+```bash
+flake8 .
+```
+If the linter find a problem, it will show a message with the error.
+```bash
+./src/Schedule.py:13:3: E303 too many blank lines (2)
+./src/Schedule.py:20:1: W391 blank line at end of file
+```
+Fixing the error manually and when finish, flake8 will not show any message.
+
+## Formatter
+The project uses [black](https://black.readthedocs.io/en/stable/) as formatter. To run the formatter in all code, execute the following command:
+```bash
+black .
+```
+
+## Sorting Imports
+The project uses [isort](https://pycqa.github.io/isort/) as sorting imports. To run the sorting imports in all code, execute the following command:
+```bash
+isort .
 ```
