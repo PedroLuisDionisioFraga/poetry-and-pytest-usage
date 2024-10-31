@@ -35,14 +35,13 @@ classDiagram
         - Period period
         + get_client_name() string
         + get_room() Room
-        + reserve_room(room: Room, period: Period) bool
     }
 
     class Period {
-        - Date start_date
-        - Date end_date
-        + update_start_date() bool
-        + update_end_date() bool
+        - Date start
+        - Date end
+        + update_start() bool
+        + update_end() bool
     }
 
     Room "1" <-- "*" Schedule : "associates with"
