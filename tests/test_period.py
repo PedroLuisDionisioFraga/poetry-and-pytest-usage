@@ -11,7 +11,7 @@ from hazbin_hotel.src.period import Period
 
 
 class TestPeriod:
-    def test_period_initialization_valid(self):
+    def test_should_be_able_to_initialize_valid_period(self):
         """
         Test the initialization of a valid Period object.
         """
@@ -21,7 +21,7 @@ class TestPeriod:
         assert period.start == start
         assert period.end == end
 
-    def test_period_initialization_invalid(self):
+    def test_should_not_be_able_to_initialize_invalid_period(self):
         """
         Test the initialization of an invalid Period object.
         The start date is after the end date, which should raise a ValueError.
@@ -31,7 +31,7 @@ class TestPeriod:
         with pytest.raises(ValueError):
             Period(start, end)
 
-    def test_change_start_valid(self):
+    def test_should_be_able_to_change_start_to_valid_date(self):
         """
         Test changing the start date of a Period object to a valid date.
         """
@@ -43,7 +43,7 @@ class TestPeriod:
         assert result is True
         assert period.start == new_start
 
-    def test_change_start_invalid(self):
+    def test_should_not_be_able_to_change_start_to_invalid_date(self):
         """
         Test changing the start date of a Period object to an invalid date.
         The new start date is after the end date, which should return False.
@@ -56,7 +56,7 @@ class TestPeriod:
         assert result is False
         assert period.start == start
 
-    def test_change_end_valid(self):
+    def test_should_be_able_to_change_end_to_valid_date(self):
         """
         Test changing the end date of a Period object to a valid date.
         """
@@ -68,7 +68,7 @@ class TestPeriod:
         assert result is True
         assert period.end == new_end
 
-    def test_change_end_invalid(self):
+    def test_should_not_be_able_to_change_end_to_invalid_date(self):
         """
         Test changing the end date of a Period object to an invalid date.
         The new end date is before the start date, which should return False.
