@@ -1,3 +1,29 @@
+[tool.poetry]
+name = "hazbin_hotel"
+version = "0.0.1"
+description = ""
+authors = [
+    "Pedro Augusto. <pedr.augustobarbosa.aparecido@gmail.com>",
+    "Pedro Luis <pedrodfraga@hotmail.com>",
+    "Marcos Henrique <marcoshbp71@gmail.com>",
+]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+[tool.poetry.group.dev.dependencies]
+taskipy = "^1.14.0"
+black = "^24.10.0"
+flake8 = "^7.1.1"
+isort = "^5.13.2"
+pytest = "^8.3.3"
+pytest-cov = "^6.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.black]
 line-length = 120
 target-version = ["py312"]
@@ -18,3 +44,14 @@ exclude = '''
 
 [tool.isort]
 profile = "black"
+
+[tool.pytest.ini_options]
+pythonpath = "."
+addopts = "--ignore=tasks --doctest-modules"
+
+[tool.taskipy.tasks]
+lint = "black --check --diff . && isort --check --diff ."
+lint-fix = "black . && isort ."
+test = "pytest -s -x --cov=hazbin_hotel -vv"
+pre_test = "task lint"
+post_test = "coverage html"

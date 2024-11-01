@@ -40,15 +40,18 @@ classDiagram
     class Period {
         - Date start
         - Date end
-        + update_start() bool
-        + update_end() bool
+        + change_start() bool
+        + change_end() bool
     }
 
     Room "1" <-- "*" Schedule : "associates with"
     Schedule "*" --> "1" Period
 ```
 
-## Linter
+## Code Quality
+
+
+### Linter
 The project uses [flake8](https://flake8.pycqa.org/en/latest/) as linter. To run the linter in all code, execute the following command:
 ```bash
 flake8 .
@@ -60,14 +63,19 @@ If the linter find a problem, it will show a message with the error.
 ```
 Fixing the error manually and when finish, flake8 will not show any message.
 
-## Formatter
+### Formatter
 The project uses [black](https://black.readthedocs.io/en/stable/) as formatter. To run the formatter in all code, execute the following command:
 ```bash
 black .
 ```
 
-## Sorting Imports
+### Sorting Imports
 The project uses [isort](https://pycqa.github.io/isort/) as sorting imports. To run the sorting imports in all code, execute the following command:
 ```bash
 isort .
 ```
+
+### Resume
+- **Black**: A code formatter that applies consistent style across your code automatically.
+- **isort**: Organizes and sorts imports to keep them clean and PEP 8-compliant.
+- **Flake8**: A linter that checks for syntax errors, potential bugs, and style violations.
