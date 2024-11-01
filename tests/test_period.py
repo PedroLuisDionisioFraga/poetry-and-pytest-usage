@@ -1,10 +1,14 @@
-import sys
 import os
+import sys
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import pytest
 from datetime import datetime
-from src.period import Period
+
+import pytest
+
+from hazbin_hotel.src.period import Period
+
 
 def test_period_initialization_valid():
     start = datetime(2023, 1, 1)
@@ -13,11 +17,13 @@ def test_period_initialization_valid():
     assert period.start == start
     assert period.end == end
 
+
 def test_period_initialization_invalid():
     start = datetime(2023, 1, 2)
     end = datetime(2023, 1, 1)
     with pytest.raises(ValueError):
         Period(start, end)
+
 
 def test_change_start_valid():
     start = datetime(2023, 1, 1)
@@ -28,6 +34,7 @@ def test_change_start_valid():
     assert result is True
     assert period.start == new_start
 
+
 def test_change_start_invalid():
     start = datetime(2023, 1, 1)
     end = datetime(2023, 1, 5)
@@ -37,6 +44,7 @@ def test_change_start_invalid():
     assert result is False
     assert period.start == start
 
+
 def test_change_end_valid():
     start = datetime(2023, 1, 1)
     end = datetime(2023, 1, 5)
@@ -45,6 +53,7 @@ def test_change_end_valid():
     result = period.change_end(new_end)
     assert result is True
     assert period.end == new_end
+
 
 def test_change_end_invalid():
     start = datetime(2023, 1, 1)
