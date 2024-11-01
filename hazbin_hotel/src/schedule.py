@@ -16,7 +16,3 @@ class Schedule:
         @property
         def client_name(self) -> str:
             return self._client_name
-
-        @client_name.getter
-        def client_name(self) -> str:
-            return self._client_name
