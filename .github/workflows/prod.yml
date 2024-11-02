@@ -1,13 +1,11 @@
 on:
-  push:
+  pull_request:
     branches:
-      - master
-    tags: ["*"]
+      - main
 
 jobs:
-  build-lib:
-    name: "Library Build"
-#    if: startsWith(github.ref, 'refs/tags/v')
+  test:
+    name: "Hazbin Hotel Test"
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -16,23 +14,28 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.11.6'
+          python-version: '3.12.7'
 
       - name: Setup Poetry
         run: pip install poetry
 
       - name: Install Project Dependencies
-        run: poetry install --without docs
+        run: poetry install
 
       - name: Run the Tests
         run: poetry run task test --cov-report=xml
 
       - name: Upload Cov to CodeCov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Upload html coverage artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-html-coverage
+          path: htmlcov/
