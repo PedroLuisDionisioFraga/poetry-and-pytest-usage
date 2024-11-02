@@ -25,7 +25,7 @@ jobs:
         run: pip install poetry
 
       - name: Install Project Dependencies
-        run: poetry install --without docs
+        run: poetry install
 
       - name: Run the Tests
         run: poetry run task test --cov-report=xml
