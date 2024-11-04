@@ -27,6 +27,12 @@ jobs:
       - name: Install Project Dependencies
         run: poetry install
 
+      - name: Install pre-commit
+        run: poetry run pre-commit install --install-hooks
+
+      - name: Run pre-commit hooks
+        run: poetry run pre-commit run --all-files
+
       - name: Run the Tests
         run: poetry run task test --cov-report=xml
 
