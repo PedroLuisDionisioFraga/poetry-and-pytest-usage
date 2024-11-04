@@ -18,6 +18,7 @@ classDiagram
         - int number
         - string type
         - float price
+        - float multiplier_factor_price
         - list~Schedule~ schedules
         + get_number() int
         + get_type() string
