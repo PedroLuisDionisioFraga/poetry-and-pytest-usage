@@ -4,6 +4,30 @@ on:
       - main
 
 jobs:
+
+  lint:
+    name: "Hazbin Hotel Lint"
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.7'
+
+      - name: Install Poetry and Project Dependencies
+        run: sh .github/scripts/poetry-script.sh
+
+      - name: Install pre-commit and run hooks
+        run: sh .github/scripts/pre-commit-script.sh
+
   test:
     name: "Hazbin Hotel Test"
     runs-on: ${{ matrix.os }}
@@ -21,17 +45,8 @@ jobs:
         with:
           python-version: '3.12.7'
 
-      - name: Setup Poetry
-        run: pip install poetry
-
-      - name: Install Project Dependencies
-        run: poetry install
-
-      - name: Install pre-commit
-        run: poetry run pre-commit install --install-hooks
-
-      - name: Run pre-commit hooks
-        run: poetry run pre-commit run --all-files
+      - name: Install Poetry and Project Dependencies
+        run: sh .github/scripts/poetry-script.sh
 
       - name: Run the Tests
         run: poetry run task test --cov-report=xml
