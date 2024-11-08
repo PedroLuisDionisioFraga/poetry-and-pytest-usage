@@ -10,6 +10,9 @@ from hazbin_hotel.src.schedule import Schedule
 
 
 class TestSchedule:
+    def setup_method(self, method):
+        Schedule.instance_counter = 0
+
     def test_should_be_able_to_initialize_schedule(self):
         """
         Test the initialization of a Schedule object.
