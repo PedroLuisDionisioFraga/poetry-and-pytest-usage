@@ -3,7 +3,7 @@ from typing import List
 from colorama import Fore, Style
 
 from hazbin_hotel.src.enums.types import ROOM_MULTIPLIERS, RoomTypeEnum
-from hazbin_hotel.src.exceptions import InvalidRoomType
+from hazbin_hotel.src.exceptions import InvalidRoomType, ScheduleCannotBeOverwritten
 from hazbin_hotel.src.period import Period
 from hazbin_hotel.src.schedule import Schedule
 
@@ -12,7 +12,7 @@ class Room:
     instance_count = 1
 
     def __init__(
-        self, room_type: str, price: float, schedules: List[Schedule]
+        self, room_type: RoomTypeEnum, price: float, schedules: List[Schedule]
     ) -> None:
         self._validate_room_type(room_type)
         self._validate_room_price(price)
@@ -36,11 +36,11 @@ class Room:
         self.update_price(new_price)
 
     @property
-    def type(self) -> str:
+    def type(self) -> RoomTypeEnum:
         return self._type
 
     @type.setter
-    def type(self, new_type: str):
+    def type(self, new_type: RoomTypeEnum):
         self._validate_room_type(new_type)
         if self._type == new_type:
             print(
@@ -49,8 +49,12 @@ class Room:
         self._type = new_type
 
     @property
-    def multiplier_factor_price(self) -> str:
-        return self._type
+    def multiplier_factor_price(self) -> float:
+        return self._multiplier_factor_price
+
+    @property
+    def schedules(self) -> List[Schedule]:
+        return self._schedules
 
     def add_schedule(self, schedule: Schedule):
         if not self.is_period_available(schedule.period):
@@ -84,8 +88,9 @@ class Room:
                     and scheduled.period.end >= period.end
                 )
                 or (
-                    scheduled.period.start <= period.end
-                    and scheduled.period.start >= period.end
+                    scheduled.period.start
+                    <= period.end
+                    <= scheduled.period.start
                 )
                 # or (scheduled.period.start < period.start and )
             ):
@@ -100,7 +105,9 @@ class Room:
         if not self.is_period_available(
             schedule.period, ignore_schedule=True, schedule_id=schedule_id
         ):
-            raise ValueError()
+            raise ScheduleCannotBeOverwritten(
+                f"The schedule cannot be overwritten"
+            )
 
         schedule_index_to_update = -1
         for schedule_index, scheduled in enumerate(self._schedules):
@@ -117,7 +124,8 @@ class Room:
             f'Invalid room type, please check type "{room_type.value}"'
         )
 
-    def _validate_room_type(self, room_type: RoomTypeEnum) -> None:
+    @staticmethod
+    def _validate_room_type(room_type: RoomTypeEnum) -> None:
         match room_type:
             case _ if room_type in RoomTypeEnum:
                 pass
@@ -126,6 +134,7 @@ class Room:
                     f'Invalid room type, please check type "{room_type.value}"'
                 )
 
-    def _validate_room_price(self, price: float) -> None:
+    @staticmethod
+    def _validate_room_price(price: float) -> None:
         if price < 0:
             raise ValueError(f"Price cannot be negative.")
