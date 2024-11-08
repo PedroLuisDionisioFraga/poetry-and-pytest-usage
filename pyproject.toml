@@ -11,6 +11,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
+colorama = "^0.4.6"
 
 [tool.poetry.group.dev.dependencies]
 taskipy = "^1.14.0"
@@ -26,7 +27,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
-line-length = 120
+line-length = 80
 target-version = ["py312"]
 exclude = '''
 /(

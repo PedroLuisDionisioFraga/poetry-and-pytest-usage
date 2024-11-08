@@ -107,3 +107,6 @@ class Period:
         2023-01-02 00:00:00
         """
         return self._end
+
+    def __str__(self) -> str:
+        return f"START: {self.start} | END: {self.end}"

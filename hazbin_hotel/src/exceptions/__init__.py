@@ -1,0 +1,2 @@
+class InvalidRoomType(Exception):
+    pass
