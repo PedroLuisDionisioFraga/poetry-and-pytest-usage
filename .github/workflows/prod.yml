@@ -103,7 +103,7 @@ jobs:
           python-version: '3.12.7'
 
       - name: Install Poetry and Project Dependencies
-        run: sh .github/scripts/poetry-script.sh
+        run: poetry run task docs_build
 
       - name: Build documentation
         run: mkdocs build
