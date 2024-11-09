@@ -62,6 +62,7 @@ class TestSchedule:
         schedule1 = Schedule("Client E", period)
         schedule2 = Schedule("Client F", period)
         assert schedule1.id != schedule2.id
+        self.assert_not_equal(schedule1.id, schedule2.id)
 
     def test_should_be_able_to_assign_new_period_to_schedule(self):
         """
