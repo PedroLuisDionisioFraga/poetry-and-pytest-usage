@@ -1,16 +1,19 @@
 import os
 import sys
 
+from tests import BaseTest
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from datetime import datetime
 
 import pytest
 
+from hazbin_hotel.src.exceptions.room.invalid_period_error import InvalidPeriodError
 from hazbin_hotel.src.period import Period
 
 
-class TestPeriod:
+class TestPeriod(BaseTest):
     def test_should_be_able_to_initialize_valid_period(self):
         """
         Test the initialization of a valid Period object.
@@ -18,8 +21,8 @@ class TestPeriod:
         start = datetime(2023, 1, 1)
         end = datetime(2023, 1, 2)
         period = Period(start, end)
-        assert period.start == start
-        assert period.end == end
+        self.assert_equal(period.start, start)
+        self.assert_equal(period.end, end)
 
     def test_should_not_be_able_to_initialize_invalid_period(self):
         """
@@ -28,7 +31,7 @@ class TestPeriod:
         """
         start = datetime(2023, 1, 2)
         end = datetime(2023, 1, 1)
-        with pytest.raises(ValueError):
+        with pytest.raises(InvalidPeriodError):
             Period(start, end)
 
     def test_should_be_able_to_change_start_to_valid_date(self):
@@ -40,8 +43,8 @@ class TestPeriod:
         period = Period(start, end)
         new_start = datetime(2023, 1, 2)
         result = period.change_start(new_start)
-        assert result is True
-        assert period.start == new_start
+        self.assert_equal(result, True)
+        self.assert_equal(period.start, new_start)
 
     def test_should_not_be_able_to_change_start_to_invalid_date(self):
         """
@@ -53,8 +56,8 @@ class TestPeriod:
         period = Period(start, end)
         new_start = datetime(2023, 1, 6)
         result = period.change_start(new_start)
-        assert result is False
-        assert period.start == start
+        self.assert_equal(result, False)
+        self.assert_equal(period.start, start)
 
     def test_should_be_able_to_change_end_to_valid_date(self):
         """
@@ -65,8 +68,8 @@ class TestPeriod:
         period = Period(start, end)
         new_end = datetime(2023, 1, 4)
         result = period.change_end(new_end)
-        assert result is True
-        assert period.end == new_end
+        self.assert_equal(result, True)
+        self.assert_equal(period.end, new_end)
 
     def test_should_not_be_able_to_change_end_to_invalid_date(self):
         """
@@ -78,5 +81,14 @@ class TestPeriod:
         period = Period(start, end)
         new_end = datetime(2022, 12, 31)
         result = period.change_end(new_end)
-        assert result is False
-        assert period.end == end
+        self.assert_equal(result, False)
+        self.assert_equal(period.end, end)
+
+    def test_should_be_able_to_convert_period_to_string(self):
+        """
+        Test the __str__ method of a Period object.
+        """
+        start = datetime(2023, 1, 1)
+        end = datetime(2023, 1, 2)
+        period = Period(start, end)
+        self.assert_equal(str(period), f"START: {start} | END: {end}")
