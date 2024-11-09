@@ -106,12 +106,7 @@ jobs:
         run: sh .github/scripts/poetry-script.sh
 
       - name: Build documentation
-        run: mkdocs build
-
-      # - name: Deploy to Read the Docs
-      #   env:
-      #     READTHEDOCS_API_TOKEN: ${{ secrets.READTHEDOCS_TOKEN }}
-      #   run: poetry run task docs_build
+        run: sh .github/scripts/build-documentation.sh
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
