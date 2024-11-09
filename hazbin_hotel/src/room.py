@@ -106,7 +106,7 @@ class Room:
             schedule.period, ignore_schedule=True, schedule_id=schedule_id
         ):
             raise ScheduleCannotBeOverwritten(
-                f"The schedule cannot be overwritten"
+                "The schedule cannot be overwritten"
             )
 
         schedule_index_to_update = -1
@@ -137,4 +137,4 @@ class Room:
     @staticmethod
     def _validate_room_price(price: float) -> None:
         if price < 0:
-            raise ValueError(f"Price cannot be negative.")
+            raise ValueError("Price cannot be negative.")
