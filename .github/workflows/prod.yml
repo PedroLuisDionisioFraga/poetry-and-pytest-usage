@@ -61,32 +61,32 @@ jobs:
           name: test-html-coverage
           path: htmlcov/
 
-  publish-build-docs:
+  # publish-build-docs:
 
-    name: "Hazbin Hotel Build Docs and Publish"
-    runs-on: ${{ matrix.os }}
+  #   name: "Hazbin Hotel Build Docs and Publish"
+  #   runs-on: ${{ matrix.os }}
 
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
+  #   strategy:
+  #     matrix:
+  #       os: [ubuntu-latest]
 
-    steps:
+  #   steps:
 
-      - name: Checkout
-        uses: actions/checkout@v4
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12.7'
+  #     - name: Setup Python
+  #       uses: actions/setup-python@v5
+  #       with:
+  #         python-version: '3.12.7'
 
-      - name: Install Poetry and Project Dependencies
-        run: sh .github/scripts/poetry-script.sh
+  #     - name: Install Poetry and Project Dependencies
+  #       run: sh .github/scripts/poetry-script.sh
 
-      - name: Build documentation
-        run: mkdocs build
+  #     - name: Build documentation
+  #       run: mkdocs build
 
-      - name: Deploy to Read the Docs
-        env:
-          READTHEDOCS_API_TOKEN: ${{ secrets.READTHEDOCS_TOKEN }}
-        run: sh .github/scripts/upload-read-the-docs.sh
+  #     - name: Deploy to Read the Docs
+  #       env:
+  #         READTHEDOCS_API_TOKEN: ${{ secrets.READTHEDOCS_TOKEN }}
+  #       run: sh .github/scripts/upload-read-the-docs.sh
