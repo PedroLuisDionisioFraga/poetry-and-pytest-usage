@@ -9,9 +9,7 @@ class RoomTypeEnum(Enum):
     FAMILY = "FAMILY"  # Larger room for families, often with extra beds.
     DELUXE = "DELUXE"  # Higher-end room with added comfort or space.
     STUDIO = "STUDIO"  # Open-plan room with living and sleeping area.
-    PRESIDENTIAL_SUITE = (
-        "PRESIDENTIAL_SUITE"  # Top-tier suite with premium amenities.
-    )
+    PRESIDENTIAL_SUITE = "PRESIDENTIAL_SUITE"  # Top-tier suite with premium amenities.
     BUNGALOW = "BUNGALOW"  # Stand-alone unit, often with private outdoor space.
     PENTHOUSE = "PENTHOUSE"  # Luxurious top-floor suite with exclusive views.
 
