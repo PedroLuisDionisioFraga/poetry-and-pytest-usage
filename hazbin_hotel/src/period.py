@@ -1,5 +1,7 @@
 from datetime import datetime
 
+from hazbin_hotel.src.exceptions.room.invalid_period_error import InvalidPeriodError
+
 
 class Period:
     """
@@ -22,7 +24,7 @@ class Period:
             ValueError: If the start date is after the end date.
         """
         if start > end:
-            raise ValueError("Start date must be before end date.")
+            raise InvalidPeriodError("Start date must be before end date.")
         self._start = start
         self._end = end
 

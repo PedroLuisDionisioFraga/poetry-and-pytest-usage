@@ -6,7 +6,7 @@ import sys
 import pytest
 
 from hazbin_hotel.src.enums.types import RoomTypeEnum
-from hazbin_hotel.src.exceptions import InvalidRoomType
+from hazbin_hotel.src.exceptions import InvalidRoomType, ScheduleCannotBeOverwritten
 from hazbin_hotel.src.period import Period
 from hazbin_hotel.src.room import Room
 from hazbin_hotel.src.schedule import Schedule
@@ -28,7 +28,8 @@ class TestRoom(BaseTest):
             schedules=[self.schedule],
         )
 
-    def teardown_method(self, _):
+    @staticmethod
+    def teardown_method(_):
         Room.instance_count = 1
         Schedule.instance_counter = 0
 
@@ -110,5 +111,5 @@ class TestRoom(BaseTest):
             "Cliente A",
             Period(start_period + datetime.timedelta(days=2), end_period),
         )
-        with pytest.raises(ValueError):
+        with pytest.raises(ScheduleCannotBeOverwritten):
             self.room.update_schedule(schedule, schedule.id)

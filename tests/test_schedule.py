@@ -7,9 +7,10 @@ from datetime import datetime
 
 from hazbin_hotel.src.period import Period
 from hazbin_hotel.src.schedule import Schedule
+from tests import BaseTest
 
 
-class TestSchedule:
+class TestSchedule(BaseTest):
     def setup_method(self, method):
         Schedule.instance_counter = 0
 
@@ -22,9 +23,10 @@ class TestSchedule:
         """
         period = Period(datetime(2023, 1, 1), datetime(2023, 1, 2))
         schedule = Schedule("Client A", period)
-        assert schedule.client_name == "Client A"
-        assert schedule.period == period
-        assert schedule.id == 0
+        self.assert_equal(Schedule.instance_counter, 1)
+        self.assert_equal(schedule.client_name, "Client A")
+        self.assert_equal(schedule.period, period)
+        self.assert_equal(schedule.id, 0)
 
     def test_should_be_able_to_access_and_modify_client_name_property(self):
         """
@@ -35,9 +37,9 @@ class TestSchedule:
         """
         period = Period(datetime(2023, 1, 1), datetime(2023, 1, 2))
         schedule = Schedule("Client B", period)
-        assert schedule.client_name == "Client B"
+        self.assert_equal(schedule.client_name, "Client B")
         schedule.client_name = "Client C"
-        assert schedule.client_name == "Client C"
+        self.assert_equal(schedule.client_name, "Client C")
 
     def test_should_increment_instance_counter(self):
         """
@@ -49,7 +51,7 @@ class TestSchedule:
         initial_counter = Schedule.instance_counter
         period = Period(datetime(2023, 1, 1), datetime(2023, 1, 2))
         Schedule("Client D", period)
-        assert Schedule.instance_counter == initial_counter + 1
+        self.assert_equal(Schedule.instance_counter, initial_counter + 1)
 
     def test_should_assign_unique_id_to_each_schedule(self):
         """
@@ -62,6 +64,7 @@ class TestSchedule:
         schedule1 = Schedule("Client E", period)
         schedule2 = Schedule("Client F", period)
         assert schedule1.id != schedule2.id
+        self.assert_not_equal(schedule1.id, schedule2.id)
 
     def test_should_be_able_to_assign_new_period_to_schedule(self):
         """
@@ -74,7 +77,7 @@ class TestSchedule:
         period2 = Period(datetime(2023, 2, 1), datetime(2023, 2, 2))
         schedule = Schedule("Client G", period1)
         schedule.period = period2
-        assert schedule.period == period2
+        self.assert_equal(schedule.period, period2)
 
     def test_should_be_able_to_get_and_set_client_name(self):
         """
@@ -85,6 +88,6 @@ class TestSchedule:
         """
         period = Period(datetime(2023, 1, 1), datetime(2023, 1, 2))
         schedule = Schedule("Client H", period)
-        assert schedule.client_name == "Client H"
+        self.assert_equal(schedule.client_name, "Client H")
         schedule.client_name = "Client I"
-        assert schedule.client_name == "Client I"
+        self.assert_equal(schedule.client_name, "Client I")
