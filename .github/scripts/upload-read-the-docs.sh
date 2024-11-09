@@ -1,1 +1,1 @@
-poetry run mkdocs build
+poetry run task docs_build
