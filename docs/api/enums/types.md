@@ -1,0 +1,1 @@
+::: src.enums.types.RoomTypeEnum

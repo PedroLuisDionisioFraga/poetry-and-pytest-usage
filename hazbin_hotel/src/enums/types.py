@@ -2,6 +2,22 @@ from enum import Enum
 
 
 class RoomTypeEnum(Enum):
+    """
+    Enumeration of room types in a hotel, each representing a specific type of room setup and amenity level.
+
+    Attributes:
+        SINGLE (str): Single bed for one guest.
+        DOUBLE (str): Room with a double bed for two guests.
+        TWIN (str): Two single beds for two guests.
+        SUITE (str): Larger room with luxury amenities.
+        FAMILY (str): Larger room for families, often with extra beds.
+        DELUXE (str): Higher-end room with added comfort or space.
+        STUDIO (str): Open-plan room with combined living and sleeping area.
+        PRESIDENTIAL_SUITE (str): Top-tier suite with premium amenities.
+        BUNGALOW (str): Stand-alone unit, often with private outdoor space.
+        PENTHOUSE (str): Luxurious top-floor suite with exclusive views.
+    """
+
     SINGLE = "SINGLE"  # Single bed for one guest.
     DOUBLE = "DOUBLE"  # Room with a double bed for two guests.
     TWIN = "TWIN"  # Two single beds for two guests.
@@ -9,9 +25,7 @@ class RoomTypeEnum(Enum):
     FAMILY = "FAMILY"  # Larger room for families, often with extra beds.
     DELUXE = "DELUXE"  # Higher-end room with added comfort or space.
     STUDIO = "STUDIO"  # Open-plan room with living and sleeping area.
-    PRESIDENTIAL_SUITE = (
-        "PRESIDENTIAL_SUITE"  # Top-tier suite with premium amenities.
-    )
+    PRESIDENTIAL_SUITE = "PRESIDENTIAL_SUITE"  # Top-tier suite with premium amenities.
     BUNGALOW = "BUNGALOW"  # Stand-alone unit, often with private outdoor space.
     PENTHOUSE = "PENTHOUSE"  # Luxurious top-floor suite with exclusive views.
 

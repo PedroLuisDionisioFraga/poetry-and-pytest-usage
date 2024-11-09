@@ -34,11 +34,11 @@ class Schedule:
         Returns:
             str: The name of the client.
 
-        Example:
-        >> period = Period(datetime(2023, 1, 1), datetime(2023, 1, 2))
-        >> schedule = Schedule("Client A", period)
-        >> print(schedule.client_name)
-        Client A
+        Examples:
+            >>> period = Period(datetime(2023, 1, 1), datetime(2023, 1, 2))
+            >>> schedule = Schedule("Client A", period)
+            >>> print(schedule.client_name)
+            Client A
         """
         return self._client_name
 
@@ -50,11 +50,11 @@ class Schedule:
         Args:
             value (str): The new client name.
 
-        Example:
-        >> period = Period(datetime(2023, 1, 1), datetime(2023, 1, 2))
-        >> schedule = Schedule("Client A", period)
-        >> schedule.client_name = "Client B"
-        >> print(schedule.client_name)
-        Client B
+        Examples:
+            >>> period = Period(datetime(2023, 1, 1), datetime(2023, 1, 2))
+            >>> schedule = Schedule("Client A", period)
+            >>> schedule.client_name = "Client B"
+            >>> print(schedule.client_name)
+            Client B
         """
         self._client_name = value
