@@ -33,10 +33,7 @@ class TestHotel(BaseTest):
 
     def test_should_have_room_type_available(self):
         room_type = RoomTypeEnum.PRESIDENTIAL_SUITE
-        assert (
-            self.hotel.check_room_type_availability(room_type)
-            == self.presidential_room
-        )
+        assert self.hotel.check_room_type_availability(room_type) == self.presidential_room
 
     def test_should_not_have_room_type_available(self):
         room_type = RoomTypeEnum.BUNGALOW
@@ -68,9 +65,7 @@ class TestHotel(BaseTest):
     def test_should_schedule_a_room(self):
         room_type = RoomTypeEnum.PRESIDENTIAL_SUITE
 
-        is_it_scheduled = self.hotel.schedule_a_room(
-            "Chris", room_type, self.start_date, self.end_date
-        )
+        is_it_scheduled = self.hotel.schedule_a_room("Chris", room_type, self.start_date, self.end_date)
 
         self.assert_equal(is_it_scheduled, True)
 
@@ -81,6 +76,4 @@ class TestHotel(BaseTest):
         room.add_schedule(self.schedule)
 
         with pytest.raises(RoomNotAvailable):
-            self.hotel.schedule_a_room(
-                "Chris", room_type, self.start_date, self.end_date
-            )
+            self.hotel.schedule_a_room("Chris", room_type, self.start_date, self.end_date)

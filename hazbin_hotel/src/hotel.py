@@ -26,20 +26,14 @@ class Hotel:
 
     def remove_room(self, room: Room):
         if len(room.schedules) > 0:
-            raise RoomHasSchedule(
-                f'Room "{room.type.value}-{room.number}" cannot be remove because it has schedules.'
-            )
+            raise RoomHasSchedule(f'Room "{room.type.value}-{room.number}" cannot be remove because it has schedules.')
         self._rooms.remove(room)
 
-    def check_room_type_availability(
-        self, room_type: RoomTypeEnum
-    ) -> Room | None:
+    def check_room_type_availability(self, room_type: RoomTypeEnum) -> Room | None:
         for room in self._rooms:
             if room_type == room.type:
                 return room
-        raise RoomTypeNotAvailable(
-            f'Room "{room_type.value} is not available in this hotel"'
-        )
+        raise RoomTypeNotAvailable(f'Room "{room_type.value} is not available in this hotel"')
 
     def schedule_a_room(
         self,
