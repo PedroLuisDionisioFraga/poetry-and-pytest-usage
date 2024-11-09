@@ -7,7 +7,20 @@ authors = [
     "Pedro Luis <pedrodfraga@hotmail.com>",
     "Marcos Henrique <marcoshbp71@gmail.com>",
 ]
+license = "GPL-3.0"
 readme = "README.md"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Natural Language :: English",
+    "Natural Language :: Portuguese (Brazilian)",
+    "Programming Language :: Python :: 3.12"
+]
+
+[tool.poetry.urls]
+"Documentation" = "https://pedroluisdionisiofraga.github.io/poetry-and-pytest-usage/"
+"Code" = "https://github.com/PedroLuisDionisioFraga/poetry-and-pytest-usage"
+"Bug Tracker" = "https://github.com/PedroLuisDionisioFraga/poetry-and-pytest-usage/issues"
 
 [tool.poetry.dependencies]
 python = "^3.12"

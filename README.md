@@ -80,3 +80,7 @@ isort .
 - **Black**: A code formatter that applies consistent style across your code automatically.
 - **isort**: Organizes and sorts imports to keep them clean and PEP 8-compliant.
 - **Flake8**: A linter that checks for syntax errors, potential bugs, and style violations.
+
+### Documentation
+
+- **GitHub Pages**: https://pedroluisdionisiofraga.github.io/poetry-and-pytest-usage/
