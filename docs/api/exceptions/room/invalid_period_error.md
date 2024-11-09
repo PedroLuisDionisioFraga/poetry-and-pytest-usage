@@ -1,0 +1,1 @@
+::: src.exceptions.room.invalid_period_error.InvalidPeriodError

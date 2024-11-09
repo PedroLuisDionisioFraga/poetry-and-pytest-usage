@@ -46,7 +46,6 @@ plugins:
         python:
           paths: [hazbin_hotel]
 
-
 extra:
   commands:
   annotate:
