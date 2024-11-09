@@ -77,7 +77,7 @@ jobs:
           path: htmlcov/
 
   publish-build-docs:
-
+    needs: [pypi_publish]
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -118,6 +118,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
   setup_and_build:
+    needs: [test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
