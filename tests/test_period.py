@@ -83,3 +83,12 @@ class TestPeriod(BaseTest):
         result = period.change_end(new_end)
         self.assert_equal(result, False)
         self.assert_equal(period.end, end)
+
+    def test_should_be_able_to_convert_period_to_string(self):
+        """
+        Test the __str__ method of a Period object.
+        """
+        start = datetime(2023, 1, 1)
+        end = datetime(2023, 1, 2)
+        period = Period(start, end)
+        self.assert_equal(str(period), f"START: {start} | END: {end}")
