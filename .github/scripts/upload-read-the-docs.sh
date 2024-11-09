@@ -1,1 +1,1 @@
-curl -X POST -H "Authorization: Token $READTHEDOCS_API_TOKEN" -F "version=latest" -F "file=@site" "https://readthedocs.org/api/v3/projects/poetry-and-pytest-usage/builds/"
+poetry run mkdocs build

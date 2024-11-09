@@ -12,6 +12,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.12"
 colorama = "^0.4.6"
+ghp-import = "^2.1.0"
 
 [tool.poetry.group.dev.dependencies]
 taskipy = "^1.14.0"

@@ -3,6 +3,15 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
 
   lint:
@@ -64,32 +73,48 @@ jobs:
           name: test-html-coverage
           path: htmlcov/
 
-  # publish-build-docs:
+  publish-build-docs:
 
-  #   name: "Hazbin Hotel Build Docs and Publish"
-  #   runs-on: ${{ matrix.os }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-latest]
+    name: "Hazbin Hotel Build Docs and Publish"
+    runs-on: ${{ matrix.os }}
 
-  #   steps:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
 
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
+    steps:
 
-  #     - name: Setup Python
-  #       uses: actions/setup-python@v5
-  #       with:
-  #         python-version: '3.12.7'
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  #     - name: Install Poetry and Project Dependencies
-  #       run: sh .github/scripts/poetry-script.sh
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
-  #     - name: Build documentation
-  #       run: mkdocs build
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.7'
 
-  #     - name: Deploy to Read the Docs
-  #       env:
-  #         READTHEDOCS_API_TOKEN: ${{ secrets.READTHEDOCS_TOKEN }}
-  #       run: sh .github/scripts/upload-read-the-docs.sh
+      - name: Install Poetry and Project Dependencies
+        run: sh .github/scripts/poetry-script.sh
+
+      - name: Build documentation
+        run: mkdocs build
+
+      - name: Deploy to Read the Docs
+        env:
+          READTHEDOCS_API_TOKEN: ${{ secrets.READTHEDOCS_TOKEN }}
+        run: sh .github/scripts/upload-read-the-docs.sh
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -3,7 +3,7 @@ repo_url: https://github.com/PedroLuisDionisioFraga/poetry-and-pytest-usage
 repo_name: PedroLuisDionisioFraga/poetry-and-pytest-usage
 
 theme:
-  name: readthedocs
+  name: material
   logo: assets/logo.png
   favicon: assets/logo.png
   features:
