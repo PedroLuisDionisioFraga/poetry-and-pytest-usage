@@ -38,15 +38,15 @@ class Period:
         Returns:
             bool: True if the start date was successfully changed, False otherwise.
 
-        Example:
-        >>> from datetime import datetime
-        >>> period = Period(datetime(2023, 1, 1), datetime(2023, 1, 2))
-        >>> period.change_start(datetime(2023, 1, 3))
-        False
-        >>> period.change_start(datetime(2023, 1, 2))
-        True
-        >>> print(period.start)
-        2023-01-02 00:00:00
+        Examples:
+            >>> from datetime import datetime
+            >>> period = Period(datetime(2023, 1, 1), datetime(2023, 1, 2))
+            >>> period.change_start(datetime(2023, 1, 3))
+            False
+            >>> period.change_start(datetime(2023, 1, 2))
+            True
+            >>> print(period.start)
+            2023-01-02 00:00:00
         """
         if start > self._end:
             return False
@@ -63,15 +63,15 @@ class Period:
         Returns:
             bool: True if the end date was successfully changed, False otherwise.
 
-        Example:
-        >>> from datetime import datetime
-        >>> period = Period(datetime(2023, 1, 2), datetime(2023, 1, 3))
-        >>> period.change_end(datetime(2023, 1, 1))
-        False
-        >>> period.change_end(datetime(2023, 1, 4))
-        True
-        >>> print(period.end)
-        2023-01-04 00:00:00
+        Examples:
+            >>> from datetime import datetime
+            >>> period = Period(datetime(2023, 1, 2), datetime(2023, 1, 3))
+            >>> period.change_end(datetime(2023, 1, 1))
+            False
+            >>> period.change_end(datetime(2023, 1, 4))
+            True
+            >>> print(period.end)
+            2023-01-04 00:00:00
         """
         if self._start > end:
             return False
@@ -86,11 +86,11 @@ class Period:
         Returns:
             datetime: The start date of the period.
 
-        Example:
-        >>> from datetime import datetime
-        >>> period = Period(datetime(2023, 1, 1), datetime(2023, 1, 2))
-        >>> print(period.start)
-        2023-01-01 00:00:00
+        Examples:
+            >>> from datetime import datetime
+            >>> period = Period(datetime(2023, 1, 1), datetime(2023, 1, 2))
+            >>> print(period.start)
+            2023-01-01 00:00:00
         """
         return self._start
 
@@ -102,11 +102,11 @@ class Period:
         Returns:
             datetime: The end date of the period.
 
-        Example:
-        >>> from datetime import datetime
-        >>> period = Period(datetime(2023, 1, 1), datetime(2023, 1, 2))
-        >>> print(period.end)
-        2023-01-02 00:00:00
+        Examples:
+            >>> from datetime import datetime
+            >>> period = Period(datetime(2023, 1, 1), datetime(2023, 1, 2))
+            >>> print(period.end)
+            2023-01-02 00:00:00
         """
         return self._end
 
