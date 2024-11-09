@@ -29,6 +29,9 @@ jobs:
         run: sh .github/scripts/pre-commit-script.sh
 
   test:
+
+    needs: [lint]
+
     name: "Hazbin Hotel Test"
     runs-on: ${{ matrix.os }}
 

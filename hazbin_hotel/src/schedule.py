@@ -35,6 +35,7 @@ class Schedule:
             str: The name of the client.
 
         Examples:
+            >>> from datetime import datetime
             >>> period = Period(datetime(2023, 1, 1), datetime(2023, 1, 2))
             >>> schedule = Schedule("Client A", period)
             >>> print(schedule.client_name)
@@ -51,6 +52,7 @@ class Schedule:
             value (str): The new client name.
 
         Examples:
+            >>> from datetime import datetime
             >>> period = Period(datetime(2023, 1, 1), datetime(2023, 1, 2))
             >>> schedule = Schedule("Client A", period)
             >>> schedule.client_name = "Client B"
