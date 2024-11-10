@@ -84,3 +84,7 @@ isort .
 ### Documentation
 
 - **GitHub Pages**: https://pedroluisdionisiofraga.github.io/poetry-and-pytest-usage/
+
+### Release
+
+- **PyPi**: https://pypi.org/project/hazbin-hotel/
