@@ -41,13 +41,17 @@ class TestHotel(BaseTest):
         with pytest.raises(RoomTypeNotAvailable):
             self.hotel.check_room_type_availability(room_type)
 
-    def test_should_add_room(self):
+    def test_should_add_room(self, mocker):
         room_type = RoomTypeEnum.FAMILY
-        room = Room(room_type, 1200, [])
+        room = mocker.Mock(spec=Room)
+        room.type = room_type
+        room.price = 1200
+        room.schedules = []
 
         self.hotel.add_room(room)
 
         self.assert_equal(len(self.hotel.rooms), 2)
+        self.assert_equal(self.hotel.rooms[1], room)
 
     def test_should_remove_room(self):
         room = self.hotel.rooms[0]
