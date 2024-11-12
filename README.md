@@ -11,6 +11,27 @@ Basic project that implement tests with [Pytest](https://docs.pytest.org/en/stab
 - Chrome extension to view mermaid diagrams: [Mermaid Previewer](https://chromewebstore.google.com/detail/mermaid-previewer/oidjnlhbegipkcklbdfnbkikplpghfdl?utm_source=ext_app_menu)
 - Python 3.12
 
+## Installation
+To get started, you need to install Poetry. You can do this by following the instructions [here](https://python-poetry.org/docs/#installation).
+After installing Poetry, follow the steps below to install the project's dependencies:
+
+### Clone the repository
+```bash 
+git clone https://github.com/PedroLuisDionisioFraga/poetry-and-pytest-usage.git
+cd poetry-and-pytest-usage
+```
+
+### Install the project dependencies 
+```bash
+poetry install
+```
+
+## Running the Project
+To run the project, use the command:
+```bash
+poetry run python path/to/your/main.py
+```
+
 ## Architecture
 ```mermaid
 classDiagram
@@ -45,8 +66,18 @@ classDiagram
         + change_end() bool
     }
 
-    Room "1" <-- "*" Schedule : "associates with"
-    Schedule "*" --> "1" Period
+    class Hotel { 
+        - list~Room~ rooms 
+        + get_rooms() list~Room~ 
+        + add_room(room: Room) bool 
+        + remove_room(room: Room) bool 
+        + check_room_type_availability(room_type: RoomTypeEnum) Room | None 
+        + schedule_a_room(client_name: string, room_type: RoomTypeEnum, start_date: Date, end_date: Date) bool 
+    } 
+    
+    Room "1" <-- "*" Schedule : "associates with" 
+    Schedule "*" --> "1" Period 
+    Hotel "1" --> "*" Room : "manages"
 ```
 
 ## Code Quality
