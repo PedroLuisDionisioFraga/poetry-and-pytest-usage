@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hazbin_hotel"
-version = "0.0.1"
+version = "1.0.1"
 description = ""
 authors = [
     "Pedro Augusto. <pedr.augustobarbosa.aparecido@gmail.com>",
