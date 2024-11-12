@@ -6,4 +6,4 @@ exclude =
     .vscode,
     __pycache__,
     .venv,
-    ./**/*.yml
+    .github/pipeline.yml
