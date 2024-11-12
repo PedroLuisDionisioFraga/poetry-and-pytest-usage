@@ -37,6 +37,7 @@ pytest-cov = "^6.0.0"
 pre-commit = "^3.8.0"
 sphinx = "^4.0"
 sphinx_rtd_theme = "^1.0"
+pytest-mock = "^3.14.0"
 
 
 [tool.poetry.group.docs.dependencies]
