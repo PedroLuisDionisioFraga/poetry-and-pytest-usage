@@ -5,4 +5,5 @@ exclude =
     .git,
     .vscode,
     __pycache__,
-    .venv
+    .venv,
+    .github\workflows\pipeline.yml

@@ -68,6 +68,7 @@ exclude = '''
     | build
     | buck-out
     | \.flake8
+    | \.github/workflows/pipeline\.yml
 )/
 '''
 
