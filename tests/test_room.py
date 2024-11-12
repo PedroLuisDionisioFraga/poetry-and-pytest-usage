@@ -33,31 +33,42 @@ class TestRoom(BaseTest):
         Room.instance_count = 1
         Schedule.instance_counter = 0
 
-    def test_should_be_able_to_create_a_room(self):
+    def test_should_be_able_to_create_a_room(self, mocker):
         Room.instance_count = 1
 
         start_period = datetime.datetime.now()
         end_period = start_period + datetime.timedelta(days=5)
-        period = Period(start_period, end_period)
+        period_mock = mocker.Mock(spec=Period)
+        period_mock.start = start_period
+        period_mock.end = end_period
 
-        schedule = Schedule("Cliente A", period)
+        schedule_mock = mocker.Mock(spec=Schedule)
+        schedule_mock.client_name = "Cliente A"
+        schedule_mock.period = period_mock
 
         room = Room(
             price=1000.00,
             room_type=RoomTypeEnum.PRESIDENTIAL_SUITE,
-            schedules=[schedule],
+            schedules=[schedule_mock],
         )
 
         self.assert_equal(room.number, 1)
         self.assert_equal(room.type, RoomTypeEnum.PRESIDENTIAL_SUITE)
 
-    def test_should_be_able_to_add_schedule_in_room(self):
+    def test_should_be_able_to_add_schedule_in_room(self, mocker):
         start_period = self.end_period + datetime.timedelta(days=1)
         end_period = start_period + datetime.timedelta(hours=1, days=3)
 
-        schedule_to_add = Schedule("Cliente A", Period(start_period, end_period))
+        period_mock = mocker.Mock(spec=Period)
+        period_mock.start = start_period
+        period_mock.end = end_period
 
-        self.room.add_schedule(schedule_to_add)
+        schedule_to_add_mock = mocker.Mock(spec=Schedule)
+        schedule_to_add_mock.client_name = "Cliente A"
+        schedule_to_add_mock.period = period_mock
+        schedule_to_add_mock.id = 1
+
+        self.room.add_schedule(schedule_to_add_mock)
         self.assert_equal(len(self.room._schedules), 2)
         self.assert_equal(self.room._schedules[-1].id, 1)
 
@@ -92,24 +103,44 @@ class TestRoom(BaseTest):
         with pytest.raises(ValueError):
             self.room.update_price(-1)
 
-    def test_should_not_be_able_to_add_schedule_in_scheduled_date(self):
+    def test_should_not_be_able_to_add_schedule_in_scheduled_date(self, mocker):
         start_period = self.start_period + datetime.timedelta(days=1)
         end_period = start_period + datetime.timedelta(hours=1, days=7)
 
-        schedule = Schedule("Cliente A", Period(start_period, end_period))
-        with pytest.raises(ValueError):
-            self.room.add_schedule(schedule)
+        period_mock = mocker.Mock(spec=Period)
+        period_mock.start = start_period
+        period_mock.end = end_period
 
-    def test_should_not_be_able_to_update_schedule_to_scheduled_date(self):
+        schedule_mock = mocker.Mock(spec=Schedule)
+        schedule_mock.client_name = "Cliente A"
+        schedule_mock.period = period_mock
+
+        with pytest.raises(ValueError):
+            self.room.add_schedule(schedule_mock)
+
+    def test_should_not_be_able_to_update_schedule_to_scheduled_date(self, mocker):
         start_period = self.start_period + datetime.timedelta(days=7)
         end_period = start_period + datetime.timedelta(hours=1, days=7)
 
-        schedule = Schedule("Cliente A", Period(start_period, end_period))
-        self.room.add_schedule(schedule)
+        period_mock = mocker.Mock(spec=Period)
+        period_mock.start = start_period
+        period_mock.end = end_period
 
-        schedule = Schedule(
-            "Cliente A",
-            Period(start_period + datetime.timedelta(days=2), end_period),
-        )
+        schedule_mock = mocker.Mock(spec=Schedule)
+        schedule_mock.client_name = "Cliente A"
+        schedule_mock.period = period_mock
+        schedule_mock.id = 1
+
+        self.room.add_schedule(schedule_mock)
+
+        period_mock = mocker.Mock(spec=Period)
+        period_mock.start = start_period + datetime.timedelta(days=2)
+        period_mock.end = end_period
+
+        schedule_mock = mocker.Mock(spec=Schedule)
+        schedule_mock.client_name = "Cliente A"
+        schedule_mock.period = period_mock
+        schedule_mock.id = 2
+
         with pytest.raises(ScheduleCannotBeOverwritten):
-            self.room.update_schedule(schedule, schedule.id)
+            self.room.update_schedule(schedule_mock, schedule_mock.id)
