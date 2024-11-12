@@ -141,6 +141,6 @@ class TestRoom(BaseTest):
         schedule_mock.client_name = "Cliente A"
         schedule_mock.period = period_mock
         schedule_mock.id = 2
-        
+
         with pytest.raises(ScheduleCannotBeOverwritten):
             self.room.update_schedule(schedule_mock, schedule_mock.id)
