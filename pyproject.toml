@@ -3,6 +3,7 @@ name = "hazbin_hotel"
 version = "1.0.1"
 description = ""
 authors = [
+    "Arthur Bueno <arthurbueno1395271@hotmail.com>",
     "Pedro Augusto. <pedr.augustobarbosa.aparecido@gmail.com>",
     "Pedro Luis <pedrodfraga@hotmail.com>",
     "Marcos Henrique <marcoshbp71@gmail.com>",
